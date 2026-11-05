@@ -1,0 +1,1047 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dental Scandallo PRO — FELORYX</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  --bg: #f5f8f7;
+  --surface: #ffffff;
+  --surface-2: #eef3f2;
+  --border: #d4e3e1;
+  --teal: #0B6E6E;
+  --teal-d: #095a5a;
+  --teal-l: #d0e8e8;
+  --gold: #c49a1a;
+  --gold-bg: #fef9e7;
+  --fg: #0d1f1f;
+  --fg-2: #3a5555;
+  --fg-3: #7a9a9a;
+  --green: #1a8a4a;
+  --green-bg: #e6f7ee;
+  --yellow: #b07a00;
+  --yellow-bg: #fff8e1;
+  --red: #c0392b;
+  --red-bg: #fdecea;
+  --radius: 10px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0a1212; --surface: #111c1c; --surface-2: #162020;
+    --border: #1f3030; --fg: #e2eeee; --fg-2: #8ab8b8; --fg-3: #557070;
+    --teal: #0d8080; --teal-d: #0b6e6e; --teal-l: #0d2525;
+    --gold: #d4aa30; --gold-bg: #1a1500;
+    --green: #2ea85a; --green-bg: #0a1f12;
+    --yellow: #d4aa30; --yellow-bg: #1a1500;
+    --red: #e05050; --red-bg: #200e0e;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0a1212; --surface: #111c1c; --surface-2: #162020;
+  --border: #1f3030; --fg: #e2eeee; --fg-2: #8ab8b8; --fg-3: #557070;
+  --teal: #0d8080; --teal-d: #0b6e6e; --teal-l: #0d2525;
+  --gold: #d4aa30; --gold-bg: #1a1500;
+  --green: #2ea85a; --green-bg: #0a1f12;
+  --yellow: #d4aa30; --yellow-bg: #1a1500;
+  --red: #e05050; --red-bg: #200e0e;
+  color-scheme: dark;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--fg);font-family:'Inter',system-ui,sans-serif;font-size:14px;line-height:1.5;min-height:100vh}
+
+/* ── Layout ── */
+.app-header{background:var(--teal);color:#fff;padding:14px max(16px,env(safe-area-inset-left,0px));display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:space-between}
+.app-header .brand{display:flex;align-items:center;gap:10px}
+.app-header .logo-mark{width:34px;height:34px;background:rgba(247,201,72,.25);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;color:#F7C948;letter-spacing:.05em}
+.app-header h1{font-size:16px;font-weight:700;line-height:1.2}
+.app-header .subtitle{font-size:11px;opacity:.75;margin-top:2px}
+.header-actions{display:flex;gap:8px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:5px;padding:7px 14px;border-radius:7px;border:none;font-family:inherit;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;text-decoration:none}
+.btn-ghost{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.25)}
+.btn-ghost:hover{background:rgba(255,255,255,.22)}
+.btn-primary{background:var(--gold);color:#fff}
+.btn-primary:hover{filter:brightness(1.1)}
+.btn-outline{background:var(--surface-2);color:var(--fg-2);border:1px solid var(--border)}
+.btn-outline:hover{background:var(--border)}
+.btn-danger{background:var(--red-bg);color:var(--red);border:1px solid var(--red)}
+.btn-sm{padding:4px 10px;font-size:11px}
+
+.tabs-bar{background:var(--surface);border-bottom:1px solid var(--border);display:flex;overflow-x:auto;padding:0 max(16px,env(safe-area-inset-left,0px));gap:0}
+.tab-btn{padding:12px 18px;border:none;background:none;font-family:inherit;font-size:13px;font-weight:500;color:var(--fg-3);cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;transition:all .15s}
+.tab-btn.active{color:var(--teal);border-bottom-color:var(--teal);font-weight:600}
+.tab-btn:hover:not(.active){color:var(--fg-2)}
+
+.main{padding:20px max(16px,env(safe-area-inset-left,0px)) 48px;max-width:1100px;margin:0 auto}
+.pane{display:none}.pane.active{display:block}
+
+/* ── Cards ── */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px}
+.card-title{font-size:13px;font-weight:600;color:var(--teal);text-transform:uppercase;letter-spacing:.06em;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:620px){.two-col{grid-template-columns:1fr}}
+.three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:700px){.three-col{grid-template-columns:1fr 1fr}}
+@media(max-width:420px){.three-col{grid-template-columns:1fr}}
+
+/* ── Form elements ── */
+.form-row{display:flex;flex-direction:column;gap:4px;margin-bottom:12px}
+.form-row label{font-size:11px;font-weight:600;color:var(--fg-2);text-transform:uppercase;letter-spacing:.05em}
+.form-row input,.form-row select{background:var(--surface-2);border:1px solid var(--border);border-radius:7px;padding:8px 12px;font-family:inherit;font-size:13px;color:var(--fg);outline:none;transition:border .15s;width:100%}
+.form-row input:focus,.form-row select:focus{border-color:var(--teal)}
+.form-row .hint{font-size:10px;color:var(--fg-3);margin-top:2px}
+.form-inline{display:flex;gap:8px;flex-wrap:wrap}
+.form-inline .form-row{flex:1;min-width:120px}
+
+/* ── Stat tiles ── */
+.stat-tile{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;text-align:center}
+.stat-tile .val{font-size:26px;font-weight:700;color:var(--teal);font-variant-numeric:tabular-nums;line-height:1.1}
+.stat-tile .lbl{font-size:10px;font-weight:600;color:var(--fg-3);text-transform:uppercase;letter-spacing:.06em;margin-top:4px}
+.stat-tile .sub{font-size:11px;color:var(--fg-2);margin-top:2px}
+
+/* ── Tables ── */
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{background:var(--surface-2);color:var(--fg-2);font-weight:600;text-transform:uppercase;letter-spacing:.04em;font-size:10px;padding:8px 10px;text-align:left;border-bottom:2px solid var(--border)}
+td{padding:7px 10px;border-bottom:1px solid var(--border);color:var(--fg)}
+tr:hover td{background:var(--surface-2)}
+td input{background:transparent;border:1px solid transparent;border-radius:4px;padding:3px 6px;font-family:inherit;font-size:12px;color:var(--fg);width:100%;min-width:60px;outline:none}
+td input:focus{background:var(--teal-l);border-color:var(--teal)}
+td select{background:transparent;border:1px dashed var(--border);border-radius:4px;padding:3px 6px;font-family:inherit;font-size:12px;color:var(--fg);cursor:pointer}
+.td-num{text-align:right;font-variant-numeric:tabular-nums;font-family:'JetBrains Mono',monospace}
+.td-actions{text-align:center;width:50px}
+
+/* ── Semáforo ── */
+.semaforo{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700}
+.sem-verde{background:var(--green-bg);color:var(--green)}
+.sem-amarillo{background:var(--yellow-bg);color:var(--yellow)}
+.sem-rojo{background:var(--red-bg);color:var(--red)}
+
+/* ── Bars ── */
+.progress-bar{height:8px;background:var(--surface-2);border-radius:4px;overflow:hidden;margin-top:4px}
+.progress-fill{height:100%;border-radius:4px;transition:width .3s}
+.fill-green{background:var(--green)}
+.fill-yellow{background:#d4aa30}
+.fill-red{background:var(--red)}
+
+/* ── Misc ── */
+.section-actions{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.empty-state{text-align:center;padding:40px 20px;color:var(--fg-3)}
+.empty-state .icon{font-size:36px;margin-bottom:8px}
+.badge{display:inline-flex;align-items:center;padding:2px 8px;border-radius:12px;font-size:10px;font-weight:600}
+.badge-teal{background:var(--teal-l);color:var(--teal)}
+.notice{background:var(--gold-bg);border:1px solid #d4aa3040;border-radius:8px;padding:10px 14px;font-size:12px;color:var(--gold);margin-bottom:16px}
+.derived{color:var(--teal);font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500}
+
+/* Chart bars */
+.chart-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.chart-label{font-size:11px;color:var(--fg-2);width:140px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex-shrink:0}
+.chart-bar-wrap{flex:1;min-width:0}
+.chart-bar{height:18px;border-radius:4px;min-width:4px;transition:width .4s;display:flex;align-items:center;padding-left:6px;font-size:10px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden}
+.chart-val{font-size:11px;color:var(--fg-2);width:70px;text-align:right;flex-shrink:0;font-variant-numeric:tabular-nums;font-family:monospace}
+
+/* Delete button */
+.del-btn{background:none;border:none;cursor:pointer;color:var(--fg-3);font-size:14px;padding:3px 6px;border-radius:4px}
+.del-btn:hover{color:var(--red);background:var(--red-bg)}
+
+.moneda-tag{font-size:10px;background:var(--teal-l);color:var(--teal);padding:2px 6px;border-radius:4px;font-weight:600;cursor:pointer}
+
+/* scrollbar */
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+</style>
+</head>
+<body>
+
+<header class="app-header">
+  <div class="brand">
+    <div class="logo-mark">FX</div>
+    <div>
+      <h1>Dental Scandallo PRO</h1>
+      <div class="subtitle">FELORYX · Coste real por tratamiento</div>
+    </div>
+  </div>
+  <div class="header-actions">
+    <button class="btn btn-ghost btn-sm" onclick="exportarDatos()">&#8681; Exportar CSV</button>
+    <button class="btn btn-ghost btn-sm" onclick="importarDatos()">&#8679; Importar</button>
+    <span class="moneda-tag" onclick="cambiarMoneda()" id="moneda-tag">S/</span>
+  </div>
+</header>
+
+<nav class="tabs-bar">
+  <button class="tab-btn active" data-tab="config" onclick="switchTab(this,'config')">&#9881; Configuración</button>
+  <button class="tab-btn" data-tab="insumos" onclick="switchTab(this,'insumos')">&#9681; Insumos</button>
+  <button class="tab-btn" data-tab="personal" onclick="switchTab(this,'personal')">&#128101; Personal</button>
+  <button class="tab-btn" data-tab="procedimientos" onclick="switchTab(this,'procedimientos')">&#127973; Tratamientos</button>
+  <button class="tab-btn" data-tab="escandallo" onclick="switchTab(this,'escandallo')">&#128202; Escandallo</button>
+  <button class="tab-btn" data-tab="dashboard" onclick="switchTab(this,'dashboard')">&#127881; Dashboard</button>
+</nav>
+
+<main class="main">
+
+<!-- ══════════════════════════════════════════════════════════════
+     TAB 1: CONFIGURACIÓN
+══════════════════════════════════════════════════════════════ -->
+<div id="tab-config" class="pane active">
+
+  <div class="two-col">
+    <div>
+      <div class="card">
+        <div class="card-title">A. Datos del consultorio</div>
+        <div class="form-row"><label>Nombre / Profesional</label><input id="cfg-nombre" type="text" placeholder="Dr. García — Clínica Dental..." oninput="saveAndRecalc()"></div>
+        <div class="form-row"><label>País / Ciudad</label><input id="cfg-pais" type="text" placeholder="Lima, Perú" oninput="saveAndRecalc()"></div>
+        <div class="form-row"><label>Moneda</label>
+          <select id="cfg-moneda" onchange="saveAndRecalc();actualizarMoneda()">
+            <option value="S/">S/ (Soles)</option>
+            <option value="$">$ (Dólares)</option>
+            <option value="€">€ (Euros)</option>
+            <option value="MXN">MXN (Pesos MX)</option>
+            <option value="COP">COP (Pesos CO)</option>
+            <option value="ARS">ARS (Pesos AR)</option>
+            <option value="CLP">CLP (Pesos CL)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">C. Horas productivas mensuales</div>
+        <div class="form-row"><label>Días laborables al mes</label>
+          <input id="cfg-dias" type="number" min="1" max="31" value="22" oninput="saveAndRecalc()">
+          <span class="hint">Normalmente 22</span>
+        </div>
+        <div class="form-row"><label>Horas de atención por día</label>
+          <input id="cfg-horas" type="number" min="1" max="16" step="0.5" value="7" oninput="saveAndRecalc()">
+          <span class="hint">Las que efectivamente trabajas clínicamente</span>
+        </div>
+        <div class="form-row"><label>Factor de ocupación</label>
+          <input id="cfg-factor" type="number" min="0.1" max="1" step="0.05" value="0.75" oninput="saveAndRecalc()">
+          <span class="hint">0.65–0.80 típico. Consultas que realmente se producen.</span>
+        </div>
+        <div class="form-row"><label>Margen objetivo de referencia (%)</label>
+          <input id="cfg-margen-ref" type="number" min="0" max="100" value="30" oninput="saveAndRecalc()">
+          <span class="hint">Para el semáforo (referencia, no obligatorio)</span>
+        </div>
+        <div style="background:var(--surface-2);border-radius:8px;padding:12px;margin-top:4px">
+          <div style="font-size:11px;color:var(--fg-3);margin-bottom:4px">HORAS PRODUCTIVAS / MES</div>
+          <div class="derived" id="res-horas-prod">—</div>
+          <div style="font-size:10px;color:var(--fg-3);margin-top:8px">COSTO/HORA EFECTIVO (costos fijos)</div>
+          <div class="derived" id="res-costo-hora">—</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">D. Costo/hora manual (opcional)</div>
+        <div class="form-row">
+          <label>Override costo/hora</label>
+          <input id="cfg-hora-manual" type="number" min="0" step="0.01" placeholder="Dejar vacío = calculado automáticamente" oninput="saveAndRecalc()">
+          <span class="hint">Si ingresas un valor aquí (ej. de T001), se usa en lugar del calculado. Deja vacío para usar el automático.</span>
+        </div>
+        <div style="background:var(--teal-l);border-radius:8px;padding:10px;font-size:12px;color:var(--teal)">
+          <strong>Costo/hora que se aplicará en el escandallo:</strong>
+          <div class="derived" id="res-costo-hora-final" style="margin-top:4px">—</div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="card">
+        <div class="card-title">B. Costos fijos mensuales</div>
+        <div id="costos-fijos-lista">
+          <!-- Rows rendered by JS -->
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;padding-top:10px;border-top:1px solid var(--border)">
+          <strong style="font-size:13px">TOTAL COSTOS FIJOS</strong>
+          <strong class="derived" id="res-total-cf">S/ 0.00</strong>
+        </div>
+        <div class="stat-tile" style="margin-top:14px;text-align:left;padding:12px">
+          <div style="font-size:10px;color:var(--fg-3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px">Desglose</div>
+          <div id="cf-desglose" style="font-size:11px;color:var(--fg-2)">Llena los costos para ver el desglose.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     TAB 2: INSUMOS
+══════════════════════════════════════════════════════════════ -->
+<div id="tab-insumos" class="pane">
+  <div class="notice">&#9432; El CPU (Costo Por Uso) se calcula automáticamente: Precio envase ÷ Usos posibles × Cant. por procedimiento.</div>
+  <div class="section-actions">
+    <button class="btn btn-primary btn-sm" onclick="agregarInsumo()">+ Agregar insumo</button>
+    <button class="btn btn-outline btn-sm" onclick="cargarEjemplosInsumos()">&#128196; Cargar ejemplos</button>
+  </div>
+  <div class="card" style="padding:0">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Insumo / Material</th>
+            <th>Unidad</th>
+            <th>Precio envase</th>
+            <th>Usos posibles</th>
+            <th>Cant/proc</th>
+            <th>CPU (auto)</th>
+            <th>Tratamiento asignado</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="tabla-insumos">
+          <!-- filled by JS -->
+        </tbody>
+      </table>
+    </div>
+    <div id="insumos-empty" class="empty-state" style="display:none">
+      <div class="icon">&#9681;</div>
+      <div>Sin insumos registrados. Agrega el primer insumo.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     TAB 3: PERSONAL
+══════════════════════════════════════════════════════════════ -->
+<div id="tab-personal" class="pane">
+  <div class="notice">&#9432; Las tarifas efectivas (costo/hora) se calculan dividiendo el costo mensual bruto entre las horas trabajadas al mes. Se usarán en el escandallo de cada tratamiento.</div>
+  <div class="card">
+    <div class="card-title">Personal clínico — tarifas efectivas</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Rol</th><th>Nombre (opc.)</th><th>Costo mensual</th><th>Horas/mes</th><th>Tarifa efectiva</th><th>Notas</th></tr>
+        </thead>
+        <tbody id="tabla-personal">
+          <!-- filled by JS -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     TAB 4: PROCEDIMIENTOS
+══════════════════════════════════════════════════════════════ -->
+<div id="tab-procedimientos" class="pane">
+  <div class="section-actions">
+    <button class="btn btn-primary btn-sm" onclick="agregarProcedimiento()">+ Agregar tratamiento</button>
+    <button class="btn btn-outline btn-sm" onclick="cargarEjemplosProcedimientos()">&#128196; Cargar ejemplos</button>
+  </div>
+  <div class="card" style="padding:0">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre del tratamiento</th>
+            <th>Min. dentista</th>
+            <th>Min. auxiliar</th>
+            <th>Tarifa dentista override</th>
+            <th>Tarifa auxiliar override</th>
+            <th>Costo laboratorio</th>
+            <th>Otros variables</th>
+            <th>Precio cobrado</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="tabla-procedimientos">
+        </tbody>
+      </table>
+    </div>
+    <div id="proc-empty" class="empty-state" style="display:none">
+      <div class="icon">&#127973;</div>
+      <div>Sin tratamientos registrados. Agrega el primer tratamiento.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     TAB 5: ESCANDALLO
+══════════════════════════════════════════════════════════════ -->
+<div id="tab-escandallo" class="pane">
+  <div class="notice">&#9432; Calculado automáticamente desde las hojas de Configuración, Insumos, Personal y Tratamientos. Revisa los datos fuente si ves valores inesperados.</div>
+  <div class="card" style="padding:0">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Tratamiento</th>
+            <th class="td-num">CF Imputados</th>
+            <th class="td-num">Dentista</th>
+            <th class="td-num">Auxiliar</th>
+            <th class="td-num">Materiales</th>
+            <th class="td-num">Laboratorio</th>
+            <th class="td-num">Otros Var.</th>
+            <th class="td-num">COSTO TOTAL</th>
+            <th class="td-num">Precio</th>
+            <th class="td-num">Margen %</th>
+            <th>Semáforo</th>
+          </tr>
+        </thead>
+        <tbody id="tabla-escandallo">
+        </tbody>
+      </table>
+    </div>
+    <div id="esc-empty" class="empty-state" style="display:none">
+      <div class="icon">&#128202;</div>
+      <div>Sin datos. Registra tratamientos primero.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════
+     TAB 6: DASHBOARD
+══════════════════════════════════════════════════════════════ -->
+<div id="tab-dashboard" class="pane">
+
+  <div class="three-col" id="dash-kpis" style="margin-bottom:20px">
+    <div class="stat-tile"><div class="val" id="dash-num-trat">0</div><div class="lbl">Tratamientos</div></div>
+    <div class="stat-tile"><div class="val" id="dash-avg-margen">—</div><div class="lbl">Margen promedio</div></div>
+    <div class="stat-tile"><div class="val" id="dash-rentables">0</div><div class="lbl">Rentables &#127884;</div></div>
+  </div>
+
+  <div class="two-col">
+    <div class="card">
+      <div class="card-title">Rentabilidad por tratamiento</div>
+      <div id="dash-barras">
+        <div class="empty-state"><div class="icon">&#128202;</div>Sin datos</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Distribución del costo total</div>
+      <div id="dash-componentes">
+        <div class="empty-state"><div class="icon">&#127860;</div>Sin datos</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Alertas y recomendaciones</div>
+    <div id="dash-alertas">
+      <div class="empty-state"><div class="icon">&#10004;</div>Sin alertas. Agrega tratamientos.</div>
+    </div>
+  </div>
+
+</div>
+
+</main>
+
+<script>
+// ══════════════════════════════════════════════════════════
+// DATA MODEL
+// ══════════════════════════════════════════════════════════
+const STORAGE_KEY = 'feloryx_t002_v2';
+
+const COSTOS_FIJOS_DEFAULT = [
+  {id:'alquiler',    label:'Alquiler / hipoteca del local',    valor:0},
+  {id:'suministros', label:'Suministros (agua, luz, gas)',      valor:0},
+  {id:'comms',       label:'Comunicaciones (teléfono, internet)',valor:0},
+  {id:'seguros',     label:'Seguros',                           valor:0},
+  {id:'contabilidad',label:'Contabilidad y gestoría',           valor:0},
+  {id:'publicidad',  label:'Publicidad / marketing',            valor:0},
+  {id:'mantenimiento',label:'Mantenimiento equipos',            valor:0},
+  {id:'prestamos',   label:'Préstamos / financiación',          valor:0},
+  {id:'otros_cf',    label:'Otros costos fijos',                valor:0},
+];
+
+const PERSONAL_DEFAULT = [
+  {rol:'Dentista / Odontólogo',         nombre:'', costo:0, horas:0},
+  {rol:'Auxiliar / Asistente dental',   nombre:'', costo:0, horas:0},
+  {rol:'Higienista dental',             nombre:'', costo:0, horas:0},
+  {rol:'Recepcionista / Administración',nombre:'', costo:0, horas:0},
+];
+
+let state = {
+  config: {
+    nombre: '', pais: '', moneda: 'S/',
+    dias: 22, horas: 7, factor: 0.75,
+    hora_manual: null, margen_ref: 30,
+  },
+  costos_fijos: JSON.parse(JSON.stringify(COSTOS_FIJOS_DEFAULT)),
+  personal: JSON.parse(JSON.stringify(PERSONAL_DEFAULT)),
+  insumos: [],
+  procedimientos: [],
+};
+
+function loadState() {
+  try {
+    const s = localStorage.getItem(STORAGE_KEY);
+    if (s) {
+      const parsed = JSON.parse(s);
+      // merge preserving defaults
+      state.config = {...state.config, ...parsed.config};
+      if (parsed.costos_fijos) state.costos_fijos = parsed.costos_fijos;
+      if (parsed.personal) state.personal = parsed.personal;
+      if (parsed.insumos) state.insumos = parsed.insumos;
+      if (parsed.procedimientos) state.procedimientos = parsed.procedimientos;
+    }
+  } catch(e) {}
+}
+
+function saveState() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e) {}
+}
+
+function saveAndRecalc() {
+  readConfigFromDom();
+  saveState();
+  recalcAll();
+}
+
+// ══════════════════════════════════════════════════════════
+// CALCULATIONS (fidelidad al Excel)
+// ══════════════════════════════════════════════════════════
+function calcHorasProductivas() {
+  const d = +state.config.dias || 0;
+  const h = +state.config.horas || 0;
+  const f = +state.config.factor || 0;
+  return d * h * f;
+}
+
+function calcTotalCF() {
+  return state.costos_fijos.reduce((s, r) => s + (+r.valor || 0), 0);
+}
+
+function calcCostoHoraCalculado() {
+  const hp = calcHorasProductivas();
+  const cf = calcTotalCF();
+  return hp > 0 ? cf / hp : 0;
+}
+
+function calcCostoHoraEfectivo() {
+  const manual = state.config.hora_manual;
+  if (manual !== null && manual !== '' && !isNaN(+manual) && +manual > 0) {
+    return +manual;
+  }
+  return calcCostoHoraCalculado();
+}
+
+function calcCPU(insumo) {
+  const precio = +insumo.precio_envase || 0;
+  const usos   = +insumo.usos_posibles || 1;
+  const cant   = +insumo.cant_proc     || 1;
+  return precio / usos * cant;
+}
+
+function calcMaterialesTratamiento(procId) {
+  return state.insumos
+    .filter(i => String(i.proc_id) === String(procId))
+    .reduce((s, i) => s + calcCPU(i), 0);
+}
+
+function calcTarifaPersonal(rol) {
+  const p = state.personal.find(x => x.rol === rol);
+  if (!p) return 0;
+  const horas = +p.horas || 0;
+  if (horas === 0) return 0;
+  return (+p.costo || 0) / horas;
+}
+
+function calcEscandalloProc(proc) {
+  const costoHoraEf = calcCostoHoraEfectivo();
+
+  const minDent = +proc.minutos_dentista || 0;
+  const minAux  = +proc.minutos_auxiliar || 0;
+
+  // CF imputados = tiempo dentista × costo/hora efectivo (from fixed costs)
+  const cfImputados = (minDent / 60) * costoHoraEf;
+
+  // Costo dentista DIRECTO (override): si se proporciona, se usa en LUGAR de CF imputados
+  const tarifaDentOverride = (proc.tarifa_dentista !== '' && !isNaN(+proc.tarifa_dentista))
+    ? +proc.tarifa_dentista : null;
+
+  let costoDentista = 0;
+  let cfImputadosEff = cfImputados;
+  if (tarifaDentOverride !== null && tarifaDentOverride > 0) {
+    costoDentista = (minDent / 60) * tarifaDentOverride;
+    cfImputadosEff = 0; // override replaces CF imputados
+  }
+
+  // Auxiliar
+  const tarifaAuxOverride = (proc.tarifa_auxiliar !== '' && !isNaN(+proc.tarifa_auxiliar))
+    ? +proc.tarifa_auxiliar : null;
+  let tarifaAux = tarifaAuxOverride !== null
+    ? tarifaAuxOverride
+    : calcTarifaPersonal('Auxiliar / Asistente dental');
+  const costoAuxiliar = (minAux / 60) * tarifaAux;
+
+  const materiales   = calcMaterialesTratamiento(proc.id);
+  const laboratorio  = +proc.costo_lab       || 0;
+  const otrosVar     = +proc.otros_variables  || 0;
+
+  const costoTotal   = cfImputadosEff + costoDentista + costoAuxiliar + materiales + laboratorio + otrosVar;
+  const precio       = +proc.precio_cobrado  || 0;
+  const diferencia   = precio - costoTotal;
+  const margen       = precio > 0 ? (diferencia / precio) * 100 : (costoTotal > 0 ? -999 : 0);
+
+  return {cfImputados: cfImputadosEff, costoDentista, costoAuxiliar, materiales, laboratorio, otrosVar, costoTotal, precio, diferencia, margen};
+}
+
+function semaforo(margen, margenRef) {
+  const ref = margenRef || state.config.margen_ref || 30;
+  if (margen >= ref)              return {cls:'sem-verde',   txt:'VERDE ● Rentable'};
+  if (margen >= ref * 0.4)        return {cls:'sem-amarillo', txt:'AMARILLO ● Revisar'};
+  return                                  {cls:'sem-rojo',    txt:'ROJO ● Déficit'};
+}
+
+// ══════════════════════════════════════════════════════════
+// DOM READS
+// ══════════════════════════════════════════════════════════
+function readConfigFromDom() {
+  state.config.nombre    = document.getElementById('cfg-nombre').value;
+  state.config.pais      = document.getElementById('cfg-pais').value;
+  state.config.moneda    = document.getElementById('cfg-moneda').value;
+  state.config.dias      = +document.getElementById('cfg-dias').value  || 22;
+  state.config.horas     = +document.getElementById('cfg-horas').value || 7;
+  state.config.factor    = +document.getElementById('cfg-factor').value|| 0.75;
+  state.config.margen_ref= +document.getElementById('cfg-margen-ref').value || 30;
+  const hm = document.getElementById('cfg-hora-manual').value;
+  state.config.hora_manual = (hm === '' || hm === null) ? null : +hm;
+
+  // read costos fijos from DOM inputs
+  state.costos_fijos.forEach(cf => {
+    const el = document.getElementById('cf-' + cf.id);
+    if (el) cf.valor = +el.value || 0;
+  });
+}
+
+// ══════════════════════════════════════════════════════════
+// RENDER
+// ══════════════════════════════════════════════════════════
+const mon = () => state.config.moneda || 'S/';
+const fmt = (v) => `${mon()} ${(+v||0).toFixed(2)}`;
+const fmtp = (v) => `${(+v||0).toFixed(1)}%`;
+
+function renderConfigResults() {
+  const hp = calcHorasProductivas();
+  const cf = calcTotalCF();
+  const chCalc = calcCostoHoraCalculado();
+  const chEff  = calcCostoHoraEfectivo();
+
+  document.getElementById('res-horas-prod').textContent = `${hp.toFixed(1)} h`;
+  document.getElementById('res-costo-hora').textContent = `${fmt(chCalc)} / hora`;
+  document.getElementById('res-costo-hora-final').textContent = `${fmt(chEff)} / hora`;
+  document.getElementById('res-total-cf').textContent = fmt(cf);
+
+  // desglose
+  const activos = state.costos_fijos.filter(x => (+x.valor||0) > 0);
+  if (activos.length === 0) {
+    document.getElementById('cf-desglose').innerHTML = '<em>Llena los costos para ver el desglose.</em>';
+  } else {
+    const lines = activos.map(x => {
+      const pct = cf > 0 ? ((+x.valor/cf)*100).toFixed(0) : 0;
+      return `<div style="display:flex;justify-content:space-between;margin-bottom:3px"><span>${x.label}</span><span style="color:var(--teal)">${fmt(x.valor)} (${pct}%)</span></div>`;
+    });
+    document.getElementById('cf-desglose').innerHTML = lines.join('');
+  }
+}
+
+function renderCostosFijosList() {
+  const container = document.getElementById('costos-fijos-lista');
+  container.innerHTML = state.costos_fijos.map(cf => `
+    <div class="form-row" style="margin-bottom:8px">
+      <label>${cf.label}</label>
+      <input id="cf-${cf.id}" type="number" min="0" step="0.01" value="${cf.valor||0}" oninput="saveAndRecalc()">
+    </div>
+  `).join('');
+}
+
+function renderPersonal() {
+  const tbody = document.getElementById('tabla-personal');
+  tbody.innerHTML = state.personal.map((p, i) => `
+    <tr>
+      <td style="font-weight:500">${p.rol}</td>
+      <td><input type="text" value="${p.nombre||''}" placeholder="opcional"
+        onchange="state.personal[${i}].nombre=this.value;saveAndRecalc()"></td>
+      <td><input type="number" min="0" step="0.01" value="${p.costo||0}"
+        onchange="state.personal[${i}].costo=+this.value;saveAndRecalc()"></td>
+      <td><input type="number" min="0" value="${p.horas||0}"
+        onchange="state.personal[${i}].horas=+this.value;saveAndRecalc()"></td>
+      <td class="td-num derived">${fmt(calcTarifaPersonal(p.rol))}/h</td>
+      <td style="font-size:11px;color:var(--fg-3)">
+        ${p.rol.includes('Dentista') ? 'Tarifa usada si hay override en tratamientos' :
+          p.rol.includes('Auxiliar') ? 'Tarifa base para tratamientos con auxiliar' : ''}
+      </td>
+    </tr>
+  `).join('');
+}
+
+function renderInsumos() {
+  const tbody = document.getElementById('tabla-insumos');
+  const empty = document.getElementById('insumos-empty');
+  if (!state.insumos.length) {
+    tbody.innerHTML = '';
+    empty.style.display = '';
+    return;
+  }
+  empty.style.display = 'none';
+  const procOpts = state.procedimientos.map(p =>
+    `<option value="${p.id}" ${''}>P${p.id}: ${p.nombre||'Sin nombre'}</option>`).join('');
+  tbody.innerHTML = state.insumos.map((ins, i) => `
+    <tr>
+      <td style="color:var(--fg-3)">${i+1}</td>
+      <td><input type="text" value="${ins.nombre||''}" placeholder="Resina, adhesivo..."
+        onchange="state.insumos[${i}].nombre=this.value;saveAndRecalc()"></td>
+      <td><input type="text" value="${ins.unidad||'unidad'}" style="width:70px"
+        onchange="state.insumos[${i}].unidad=this.value;saveAndRecalc()"></td>
+      <td><input type="number" min="0" step="0.01" value="${ins.precio_envase||0}"
+        onchange="state.insumos[${i}].precio_envase=+this.value;saveAndRecalc()"></td>
+      <td><input type="number" min="1" value="${ins.usos_posibles||1}"
+        onchange="state.insumos[${i}].usos_posibles=+this.value;saveAndRecalc()"></td>
+      <td><input type="number" min="1" step="0.1" value="${ins.cant_proc||1}"
+        onchange="state.insumos[${i}].cant_proc=+this.value;saveAndRecalc()"></td>
+      <td class="td-num derived">${fmt(calcCPU(ins))}</td>
+      <td>
+        <select onchange="state.insumos[${i}].proc_id=this.value;saveAndRecalc()">
+          <option value="">— Sin asignar —</option>
+          ${state.procedimientos.map(p =>
+            `<option value="${p.id}" ${String(ins.proc_id)===String(p.id)?'selected':''}>P${p.id}: ${p.nombre||'Sin nombre'}</option>`
+          ).join('')}
+        </select>
+      </td>
+      <td class="td-actions"><button class="del-btn" onclick="eliminarInsumo(${i})">&#10005;</button></td>
+    </tr>
+  `).join('');
+}
+
+function renderProcedimientos() {
+  const tbody = document.getElementById('tabla-procedimientos');
+  const empty = document.getElementById('proc-empty');
+  if (!state.procedimientos.length) {
+    tbody.innerHTML = '';
+    empty.style.display = '';
+    return;
+  }
+  empty.style.display = 'none';
+  tbody.innerHTML = state.procedimientos.map((p, i) => `
+    <tr>
+      <td class="td-num" style="color:var(--fg-3)">P${p.id}</td>
+      <td><input type="text" value="${p.nombre||''}" placeholder="Nombre del tratamiento" style="min-width:160px"
+        onchange="state.procedimientos[${i}].nombre=this.value;saveAndRecalc()"></td>
+      <td><input type="number" min="0" value="${p.minutos_dentista||0}" style="width:65px"
+        onchange="state.procedimientos[${i}].minutos_dentista=+this.value;saveAndRecalc()"></td>
+      <td><input type="number" min="0" value="${p.minutos_auxiliar||0}" style="width:65px"
+        onchange="state.procedimientos[${i}].minutos_auxiliar=+this.value;saveAndRecalc()"></td>
+      <td><input type="number" min="0" step="0.01" value="${p.tarifa_dentista||''}" placeholder="auto"
+        onchange="state.procedimientos[${i}].tarifa_dentista=this.value;saveAndRecalc()"></td>
+      <td><input type="number" min="0" step="0.01" value="${p.tarifa_auxiliar||''}" placeholder="auto"
+        onchange="state.procedimientos[${i}].tarifa_auxiliar=this.value;saveAndRecalc()"></td>
+      <td><input type="number" min="0" step="0.01" value="${p.costo_lab||0}"
+        onchange="state.procedimientos[${i}].costo_lab=+this.value;saveAndRecalc()"></td>
+      <td><input type="number" min="0" step="0.01" value="${p.otros_variables||0}"
+        onchange="state.procedimientos[${i}].otros_variables=+this.value;saveAndRecalc()"></td>
+      <td><input type="number" min="0" step="0.01" value="${p.precio_cobrado||0}"
+        onchange="state.procedimientos[${i}].precio_cobrado=+this.value;saveAndRecalc()"></td>
+      <td class="td-actions"><button class="del-btn" onclick="eliminarProcedimiento(${i})">&#10005;</button></td>
+    </tr>
+  `).join('');
+}
+
+function renderEscandallo() {
+  const tbody = document.getElementById('tabla-escandallo');
+  const empty = document.getElementById('esc-empty');
+  if (!state.procedimientos.length) {
+    tbody.innerHTML = '';
+    empty.style.display = '';
+    return;
+  }
+  empty.style.display = 'none';
+  tbody.innerHTML = state.procedimientos.map(proc => {
+    const e = calcEscandalloProc(proc);
+    const sem = semaforo(e.margen);
+    const margenStr = e.precio > 0 ? fmtp(e.margen) : (e.costoTotal > 0 ? 'Sin precio' : '—');
+    return `
+      <tr>
+        <td style="font-weight:500">${proc.nombre||'—'}</td>
+        <td class="td-num">${fmt(e.cfImputados)}</td>
+        <td class="td-num">${e.costoDentista>0?fmt(e.costoDentista):'—'}</td>
+        <td class="td-num">${e.costoAuxiliar>0?fmt(e.costoAuxiliar):'—'}</td>
+        <td class="td-num">${e.materiales>0?fmt(e.materiales):'—'}</td>
+        <td class="td-num">${e.laboratorio>0?fmt(e.laboratorio):'—'}</td>
+        <td class="td-num">${e.otrosVar>0?fmt(e.otrosVar):'—'}</td>
+        <td class="td-num" style="font-weight:700">${fmt(e.costoTotal)}</td>
+        <td class="td-num">${e.precio>0?fmt(e.precio):'—'}</td>
+        <td class="td-num ${e.margen>=0?'':''}${e.precio>0?'derived':''}">${margenStr}</td>
+        <td><span class="semaforo ${sem.cls}">${sem.txt}</span></td>
+      </tr>`;
+  }).join('');
+}
+
+function renderDashboard() {
+  const procs = state.procedimientos;
+  const esc = procs.map(p => ({...p, ...calcEscandalloProc(p)}));
+  const conPrecio = esc.filter(e => e.precio > 0);
+
+  document.getElementById('dash-num-trat').textContent = procs.length;
+  document.getElementById('dash-rentables').textContent =
+    conPrecio.filter(e => e.margen >= state.config.margen_ref).length;
+
+  if (conPrecio.length > 0) {
+    const avg = conPrecio.reduce((s,e) => s+e.margen, 0) / conPrecio.length;
+    document.getElementById('dash-avg-margen').textContent = fmtp(avg);
+  } else {
+    document.getElementById('dash-avg-margen').textContent = '—';
+  }
+
+  // Barras de rentabilidad
+  const barras = document.getElementById('dash-barras');
+  if (!esc.length) {
+    barras.innerHTML = '<div class="empty-state"><div class="icon">&#128202;</div>Sin datos</div>';
+  } else {
+    const maxMargen = Math.max(...esc.map(e => Math.abs(e.margen)), 1);
+    barras.innerHTML = esc.map(e => {
+      const pct = e.precio > 0 ? Math.min(Math.max(e.margen, 0), 100) : 0;
+      const cls = e.margen >= state.config.margen_ref ? 'fill-green' :
+                  e.margen >= state.config.margen_ref * 0.4 ? 'fill-yellow' : 'fill-red';
+      const margenTxt = e.precio > 0 ? fmtp(e.margen) : 'S/precio';
+      return `<div class="chart-row">
+        <div class="chart-label" title="${e.nombre}">${e.nombre||'—'}</div>
+        <div class="chart-bar-wrap">
+          <div class="chart-bar ${cls}" style="width:${Math.max(pct,2)}%">${pct>=12?margenTxt:''}</div>
+        </div>
+        <div class="chart-val">${pct<12?margenTxt:''}</div>
+      </div>`;
+    }).join('');
+  }
+
+  // Componentes por tratamiento (apilado horizontal del primer tratamiento)
+  const comp = document.getElementById('dash-componentes');
+  if (!esc.length) {
+    comp.innerHTML = '<div class="empty-state"><div class="icon">&#127860;</div>Sin datos</div>';
+  } else {
+    // Suma de componentes para todos los tratamientos
+    const totCF = esc.reduce((s,e) => s+e.cfImputados, 0);
+    const totD  = esc.reduce((s,e) => s+e.costoDentista, 0);
+    const totAux= esc.reduce((s,e) => s+e.costoAuxiliar, 0);
+    const totMat= esc.reduce((s,e) => s+e.materiales, 0);
+    const totLab= esc.reduce((s,e) => s+e.laboratorio, 0);
+    const totOtr= esc.reduce((s,e) => s+e.otrosVar, 0);
+    const grand = totCF + totD + totAux + totMat + totLab + totOtr || 1;
+    const rows = [
+      {lbl:'CF Imputados', v:totCF, color:'#0B6E6E'},
+      {lbl:'Dentista directo', v:totD, color:'#0d8080'},
+      {lbl:'Auxiliar', v:totAux, color:'#56a0a0'},
+      {lbl:'Materiales', v:totMat, color:'#F7C948'},
+      {lbl:'Laboratorio', v:totLab, color:'#c49a1a'},
+      {lbl:'Otros variables', v:totOtr, color:'#8ab8b8'},
+    ].filter(r => r.v > 0);
+    comp.innerHTML = rows.map(r => {
+      const pct = (r.v / grand * 100).toFixed(0);
+      return `<div class="chart-row">
+        <div class="chart-label">${r.lbl}</div>
+        <div class="chart-bar-wrap">
+          <div class="chart-bar" style="width:${Math.max(+pct,2)}%;background:${r.color}">${pct>=12?pct+'%':''}</div>
+        </div>
+        <div class="chart-val">${pct<12?pct+'%':''} ${fmt(r.v)}</div>
+      </div>`;
+    }).join('') || '<em style="color:var(--fg-3);font-size:12px">Configura costos fijos y procedimientos.</em>';
+  }
+
+  // Alertas
+  const alertas = document.getElementById('dash-alertas');
+  const msgs = [];
+  const deficitarios = esc.filter(e => e.precio > 0 && e.margen < 0);
+  const sinPrecio    = esc.filter(e => e.precio === 0 || isNaN(e.precio));
+  const bajoRef      = esc.filter(e => e.precio > 0 && e.margen >= 0 && e.margen < state.config.margen_ref * 0.4);
+
+  if (calcCostoHoraEfectivo() === 0) {
+    msgs.push({tipo:'rojo', txt:'<strong>Sin configuración base:</strong> El costo/hora efectivo es 0. Completa los costos fijos o establece un costo/hora manual.'});
+  }
+  deficitarios.forEach(e => {
+    msgs.push({tipo:'rojo', txt:`<strong>${e.nombre}:</strong> El precio NO cubre el costo. Déficit ${fmt(e.diferencia)}. Margen: ${fmtp(e.margen)}.`});
+  });
+  bajoRef.forEach(e => {
+    msgs.push({tipo:'amarillo', txt:`<strong>${e.nombre}:</strong> Margen ${fmtp(e.margen)} — por debajo de tu referencia (${state.config.margen_ref}%). Considera revisar el precio o reducir costos.`});
+  });
+  sinPrecio.forEach(e => {
+    msgs.push({tipo:'gris', txt:`<strong>${e.nombre}:</strong> Sin precio registrado. Agrega el precio cobrado para calcular el margen.`});
+  });
+
+  // Insumos sin asignar
+  const sinAsignar = state.insumos.filter(i => !i.proc_id).length;
+  if (sinAsignar > 0) {
+    msgs.push({tipo:'gris', txt:`${sinAsignar} insumo(s) sin tratamiento asignado — no se incluirán en el escandallo. Ve a la pestaña Insumos.`});
+  }
+
+  if (!msgs.length) {
+    alertas.innerHTML = `<div style="color:var(--green);font-weight:500;padding:8px 0">&#10004; Sin alertas críticas. Todos los tratamientos con precio registrado están rentables.</div>`;
+  } else {
+    alertas.innerHTML = msgs.map(m => {
+      const bg = m.tipo==='rojo' ? 'var(--red-bg)' : m.tipo==='amarillo' ? 'var(--yellow-bg)' : 'var(--surface-2)';
+      const c  = m.tipo==='rojo' ? 'var(--red)' : m.tipo==='amarillo' ? 'var(--yellow)' : 'var(--fg-2)';
+      return `<div style="background:${bg};border-radius:7px;padding:9px 13px;margin-bottom:7px;font-size:12px;color:${c}">${m.txt}</div>`;
+    }).join('');
+  }
+}
+
+function recalcAll() {
+  renderConfigResults();
+  renderPersonal();
+  renderInsumos();
+  renderProcedimientos();
+  renderEscandallo();
+  renderDashboard();
+  actualizarMoneda();
+}
+
+// ══════════════════════════════════════════════════════════
+// MUTATIONS
+// ══════════════════════════════════════════════════════════
+let nextProcId = 1;
+
+function agregarInsumo() {
+  state.insumos.push({nombre:'',unidad:'unidad',precio_envase:0,usos_posibles:1,cant_proc:1,proc_id:''});
+  saveState();
+  recalcAll();
+  switchTab(null, 'insumos');
+}
+function eliminarInsumo(i) {
+  state.insumos.splice(i, 1);
+  saveState(); recalcAll();
+}
+function agregarProcedimiento() {
+  const id = nextProcId++;
+  state.procedimientos.push({id,nombre:'',minutos_dentista:30,minutos_auxiliar:0,
+    tarifa_dentista:'',tarifa_auxiliar:'',costo_lab:0,otros_variables:0,precio_cobrado:0});
+  saveState(); recalcAll();
+  switchTab(null, 'procedimientos');
+}
+function eliminarProcedimiento(i) {
+  const pid = state.procedimientos[i].id;
+  state.procedimientos.splice(i, 1);
+  // remove insumos linked to this proc
+  state.insumos.forEach(ins => { if (String(ins.proc_id) === String(pid)) ins.proc_id = ''; });
+  saveState(); recalcAll();
+}
+
+// ══════════════════════════════════════════════════════════
+// EXAMPLES (from T002_CASOS_PRACTICOS.md)
+// ══════════════════════════════════════════════════════════
+function cargarEjemplosInsumos() {
+  const confirmado = confirm('¿Cargar insumos de los casos prácticos ficticios? Esto se agrega a los existentes.');
+  if (!confirmado) return;
+  // from Caso 2 and Caso 3 of T002_CASOS_PRACTICOS
+  const ejemplos = [
+    {nombre:'Resina compuesta', unidad:'jeringa', precio_envase:85, usos_posibles:20, cant_proc:1, proc_id:''},
+    {nombre:'Adhesivo dental', unidad:'frasco', precio_envase:60, usos_posibles:40, cant_proc:1, proc_id:''},
+    {nombre:'Ácido grabador', unidad:'jeringa', precio_envase:20, usos_posibles:30, cant_proc:1, proc_id:''},
+    {nombre:'Guantes (caja 100)', unidad:'par', precio_envase:30, usos_posibles:100, cant_proc:1, proc_id:''},
+    {nombre:'Mascarilla (caja 50)', unidad:'unit', precio_envase:15, usos_posibles:50, cant_proc:1, proc_id:''},
+    {nombre:'Babero desechable (pack 100)', unidad:'unit', precio_envase:12, usos_posibles:100, cant_proc:1, proc_id:''},
+    {nombre:'Fresas de tallado', unidad:'set', precio_envase:120, usos_posibles:10, cant_proc:1, proc_id:''},
+    {nombre:'Provisional (set)', unidad:'set', precio_envase:45, usos_posibles:5, cant_proc:1, proc_id:''},
+    {nombre:'Material de impresión', unidad:'tarro', precio_envase:90, usos_posibles:15, cant_proc:1, proc_id:''},
+    {nombre:'Cemento temporal', unidad:'jeringa', precio_envase:30, usos_posibles:20, cant_proc:1, proc_id:''},
+  ];
+  state.insumos.push(...ejemplos);
+  saveState(); recalcAll();
+}
+function cargarEjemplosProcedimientos() {
+  if (!confirm('¿Cargar los 3 casos prácticos ficticios de T002? Se agregarán a los existentes.')) return;
+  // Case values from T002_CASOS_PRACTICOS.md (fictional)
+  const idBase = nextProcId;
+  state.procedimientos.push(
+    {id:nextProcId++, nombre:'Consulta de diagnóstico general',   minutos_dentista:30, minutos_auxiliar:0,  tarifa_dentista:'', tarifa_auxiliar:'', costo_lab:0,   otros_variables:2.0, precio_cobrado:50},
+    {id:nextProcId++, nombre:'Resina compuesta 1 cara',            minutos_dentista:45, minutos_auxiliar:20, tarifa_dentista:'', tarifa_auxiliar:'', costo_lab:0,   otros_variables:3.0, precio_cobrado:180},
+    {id:nextProcId++, nombre:'Corona cerámica con laboratorio',    minutos_dentista:100,minutos_auxiliar:60, tarifa_dentista:'', tarifa_auxiliar:'', costo_lab:350, otros_variables:8.0, precio_cobrado:900}
+  );
+  saveState(); recalcAll();
+}
+
+// ══════════════════════════════════════════════════════════
+// EXPORT / IMPORT
+// ══════════════════════════════════════════════════════════
+function exportarDatos() {
+  // Export escandallo as CSV
+  const rows = [
+    ['Tratamiento','CF Imputados','Costo Dentista','Costo Auxiliar','Materiales','Laboratorio','Otros Variables','COSTO TOTAL','Precio','Diferencia','Margen %','Semáforo']
+  ];
+  state.procedimientos.forEach(p => {
+    const e = calcEscandalloProc(p);
+    const sem = semaforo(e.margen);
+    rows.push([
+      p.nombre||'',
+      e.cfImputados.toFixed(2), e.costoDentista.toFixed(2), e.costoAuxiliar.toFixed(2),
+      e.materiales.toFixed(2), e.laboratorio.toFixed(2), e.otrosVar.toFixed(2),
+      e.costoTotal.toFixed(2), e.precio.toFixed(2), e.diferencia.toFixed(2),
+      e.precio>0 ? e.margen.toFixed(2):'', sem.txt
+    ]);
+  });
+  const csv = rows.map(r => r.map(v => `"${String(v).replace(/"/g,'""')}"`).join(',')).join('\n');
+  const blob = new Blob(['﻿'+csv], {type:'text/csv;charset=utf-8;'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href=url; a.download='feloryx_t002_escandallo.csv';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+}
+
+function importarDatos() {
+  // Export full JSON backup
+  const json = JSON.stringify(state, null, 2);
+  const blob = new Blob([json], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href=url; a.download='feloryx_t002_backup.json';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+  alert('Backup JSON descargado. Para restaurar, edita localStorage["'+STORAGE_KEY+'"] con este contenido.');
+}
+
+// ══════════════════════════════════════════════════════════
+// UI HELPERS
+// ══════════════════════════════════════════════════════════
+function switchTab(btn, tabId) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.pane').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-' + tabId).classList.add('active');
+  if (btn) btn.classList.add('active');
+  else {
+    const b = document.querySelector(`[data-tab="${tabId}"]`);
+    if (b) b.classList.add('active');
+  }
+}
+
+function actualizarMoneda() {
+  const m = state.config.moneda || 'S/';
+  document.getElementById('moneda-tag').textContent = m;
+}
+
+function cambiarMoneda() {
+  const opts = ['S/', '$', '€', 'MXN', 'COP', 'ARS', 'CLP'];
+  const cur = opts.indexOf(state.config.moneda);
+  state.config.moneda = opts[(cur+1) % opts.length];
+  document.getElementById('cfg-moneda').value = state.config.moneda;
+  saveAndRecalc();
+}
+
+// ══════════════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════════════
+function populateConfigDom() {
+  document.getElementById('cfg-nombre').value = state.config.nombre || '';
+  document.getElementById('cfg-pais').value = state.config.pais || '';
+  document.getElementById('cfg-moneda').value = state.config.moneda || 'S/';
+  document.getElementById('cfg-dias').value = state.config.dias || 22;
+  document.getElementById('cfg-horas').value = state.config.horas || 7;
+  document.getElementById('cfg-factor').value = state.config.factor || 0.75;
+  document.getElementById('cfg-margen-ref').value = state.config.margen_ref || 30;
+  document.getElementById('cfg-hora-manual').value = state.config.hora_manual || '';
+}
+
+function init() {
+  loadState();
+  // compute nextProcId from existing data
+  if (state.procedimientos.length) {
+    nextProcId = Math.max(...state.procedimientos.map(p => +p.id || 0)) + 1;
+  }
+  renderCostosFijosList();
+  populateConfigDom();
+  recalcAll();
+}
+
+init();
+</script>
+</body>
+</html>
